@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<title>HSK4 · Bài 2 — 真正的朋友 · Ngữ pháp</title>
+<style>
+:root{
+  --bg-app: #FFF8F6;
+  --bg-app-2: #FCEDEB;
+  --ink: #402530;
+  --ink-soft: #8C6B72;
+  --card-bg: #FFFFFF;
+  --card-line: #F3DEE0;
+  --shadow: rgba(178, 58, 72, 0.10);
+  --shadow-strong: rgba(178, 58, 72, 0.18);
+
+  --c-cover-1:#FFEADD; --c-cover-2:#FFCBDA;
+  --c-cover-title:#E8385F;
+  --c-cover-subtitle:#E8734A;
+
+  --c-grammar:#2E7D9E;     --c-grammar-bg:#DCF0F7;    --c-grammar-line:#A9D9ED;
+  --c-example:#C6486B;     --c-example-bg:#FBE3EC;    --c-example-line:#F0B8CE;
+  --c-practice:#4E8C6E;    --c-practice-bg:#E4F1E9;   --c-practice-line:#A9D3BB;
+  --c-highlight:#0E8F82;   --c-highlight-bg:#DCF2EF;  --c-highlight-line:#8CD3C9;
+  --c-summary:#7A3D64;     --c-summary-bg:#F1E4EC;    --c-summary-line:#D9B8CE;
+  --c-expand:#C6672A;      --c-expand-bg:#FBE8D6;     --c-expand-line:#EFC090;
+
+  --font-zh: "KaiTi","Kaiti SC","STKaiti","AR PL KaitiM GB","Kaiti",serif;
+  --font-latin: "Times New Roman", "Tinos", "Liberation Serif", Times, serif;
+
+  --sidebar-w: 236px;
+  --sidebar-w-collapsed: 60px;
+}
+
+*{ box-sizing:border-box; }
+html{ font-size:22px; }
+body{
+  margin:0; font-family:var(--font-latin); background:var(--bg-app); color:var(--ink);
+  -webkit-font-smoothing:antialiased; height:100vh; overflow:hidden;
+}
+h1,h2,h3,h4,p,ul,ol,dl,dd,dt{ font-family:var(--font-latin); }
+.zh, .zh *{ font-family:var(--font-zh); }
+.num-latin{ font-family:var(--font-latin) !important; }
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed; top:0; left:0; bottom:0; width:var(--sidebar-w);
+  background:var(--card-bg); border-right:1px solid var(--card-line); overflow-y:auto; z-index:100;
+  transition:width .28s ease;
+}
+body.sidebar-collapsed .sidebar{ width:var(--sidebar-w-collapsed); }
+.sidebar-head{ padding:16px 14px 12px; border-bottom:1px solid var(--card-line); text-align:center; }
+.brand{ font-weight:700; font-size:0.78rem; color:var(--ink); white-space:nowrap; overflow:hidden; }
+.sub{ font-size:0.62rem; color:var(--ink-soft); margin-top:4px; white-space:nowrap; overflow:hidden; }
+body.sidebar-collapsed .sub, body.sidebar-collapsed .brand{ opacity:0; }
+
+.nav-group summary, .nav-single > button{
+  display:flex; align-items:center; gap:8px; width:100%; text-align:left; padding:8px 14px;
+  background:none; border:none; cursor:pointer; font-size:0.52rem; font-weight:700; color:var(--ink); list-style:none;
+  min-width:0;
+}
+.nav-group summary .label, .nav-single > button .label{
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1 1 auto;
+}
+.nav-group summary::-webkit-details-marker{ display:none; }
+.nav-group summary .chev{ margin-left:auto; font-size:0.75rem; color:var(--ink-soft); transition:transform .2s; }
+.nav-group[open] summary .chev{ transform:rotate(90deg); }
+.nav-group{ border-bottom:1px solid var(--card-line); }
+.nav-single{ border-bottom:1px solid var(--card-line); }
+.nav-single > button{ font-weight:700; }
+.nav-item{
+  display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding:5px 14px 5px 34px; font-size:0.5rem; color:var(--ink-soft);
+  border-left:3px solid transparent; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.nav-item:hover, .nav-single>button:hover{ background:var(--bg-app-2); }
+.nav-item.active, .nav-single > button.active{
+  background:var(--c-summary-bg); color:var(--c-summary); font-weight:700; border-left-color:var(--c-summary);
+}
+body.sidebar-collapsed .nav-group summary, body.sidebar-collapsed .nav-single>button{
+  justify-content:center; padding:11px 0;
+}
+body.sidebar-collapsed .nav-group summary .label,
+body.sidebar-collapsed .nav-group summary .chev,
+body.sidebar-collapsed .nav-single > button .label,
+body.sidebar-collapsed .nav-item{ display:none; }
+.sidebar-backdrop{ display:none; }
+
+/* ===== CONTENT COL ===== */
+.content-col{
+  margin-left:var(--sidebar-w); height:100vh; display:flex; flex-direction:column;
+  transition:margin-left .28s ease; overflow:hidden;
+}
+body.sidebar-collapsed .content-col{ margin-left:var(--sidebar-w-collapsed); }
+.main{ padding:16px 44px 6px; flex:1 1 auto; min-height:0; max-width:none; width:100%; display:flex; flex-direction:column; overflow:hidden; }
+.sidebar-toggle{ background:none; border:1px solid var(--card-line); border-radius:10px; width:38px; height:38px; font-size:1.1rem; cursor:pointer; color:var(--ink); flex:0 0 auto; }
+.top-toolbar{ display:flex; gap:10px; margin-bottom:8px; flex:0 0 auto; }
+.fullscreen-toggle{ background:none; border:1px solid var(--card-line); border-radius:10px; width:38px; height:38px; font-size:1.1rem; cursor:pointer; color:var(--ink); flex:0 0 auto; }
+.fullscreen-toggle:hover, .sidebar-toggle:hover{ background:var(--bg-app-2); }
+.site-footer{
+  background:var(--bg-app); color:var(--ink-soft); display:flex; align-items:center; justify-content:center;
+  font-size:0.5rem; padding:5px 0; flex:0 0 auto; text-align:center;
+}
+
+#slidesContainer{ position:relative; flex:1 1 auto; min-height:0; overflow:hidden; }
+.slide{ display:none; }
+.slide.active{ display:flex; align-items:center; justify-content:center; position:absolute; inset:0; animation:fadeIn .35s ease; }
+.slide.cover-slide.active{ align-items:stretch; }
+@keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+.slide-card{
+  background:none; border:none; border-radius:0; box-shadow:none; padding:4px 6px;
+  width:100%; max-width:1520px; transform-origin:center center; will-change:transform;
+}
+
+.eyebrow{ display:flex; width:max-content; align-items:center; gap:8px; font-size:0.95rem; font-weight:700; letter-spacing:.02em; padding:6px 16px; border-radius:999px; margin:0 auto 8px; }
+.eyebrow.grammar{ color:var(--c-grammar); background:var(--c-grammar-bg); border:1px solid var(--c-grammar-line); }
+.eyebrow.practice{ color:var(--c-practice); background:var(--c-practice-bg); border:1px solid var(--c-practice-line); }
+.eyebrow.review{ color:var(--c-highlight); background:var(--c-highlight-bg); border:1px solid var(--c-highlight-line); }
+.eyebrow.summary{ color:var(--c-summary); background:var(--c-summary-bg); border:1px solid var(--c-summary-line); }
+.eyebrow.expand{ color:var(--c-expand); background:var(--c-expand-bg); border:1px solid var(--c-expand-line); }
+
+.slide h2{ font-size:2.6rem; margin:0 0 4px; color:var(--ink); text-align:center; }
+.slide .subtitle{ font-size:1.4rem; color:var(--ink-soft); margin:0 0 12px; text-align:center; line-height:1.35; }
+
+/* ===== COVER ===== */
+.cover-slide .slide-card{
+  background:none;
+  color:var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:space-evenly;
+  text-align:center; border-radius:0; padding:60px 80px; height:100%;
+}
+.cover-badge{ background:rgba(43,36,64,0.08); border:1px solid rgba(43,36,64,0.14); border-radius:999px; padding:6px 16px; font-size:0.85rem; font-weight:700; margin:0; }
+.cover-slide h1.zh{ font-size:4.2rem; margin:0; line-height:1.1; color:var(--c-cover-title); text-shadow:0 1px 2px rgba(64,37,48,0.10); }
+.cover-slide .cover-vi{ font-size:2rem; margin:0; letter-spacing:.01em; font-weight:700; color:var(--c-cover-subtitle); text-shadow:0 1px 2px rgba(64,37,48,0.08); }
+.cover-slide .cover-points{
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; max-width:640px;
+}
+.cover-point-chip{
+  background:rgba(255,255,255,0.65); border:1.5px solid rgba(43,36,64,0.16); border-radius:999px;
+  padding:7px 16px; font-size:0.95rem; font-weight:700; color:var(--ink);
+}
+@media (max-width:600px){
+  .cover-slide h1.zh{ font-size:2.6rem; }
+  .cover-slide .cover-vi{ font-size:1.3rem; }
+  .cover-slide .slide-card{ padding:36px 20px; }
+}
+
+/* ===== GRAMMAR EXPLANATION BLOCK ===== */
+.gpoint-num{
+  display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+  background:var(--c-grammar); color:#fff; font-weight:700; font-size:1.05rem; margin-right:8px; flex:0 0 auto;
+}
+.gpoint-head{ display:flex; align-items:center; justify-content:center; gap:2px; margin-bottom:10px; }
+.gpoint-head h2{ margin:0; }
+.explain-box{
+  background:none; border:none; border-radius:0;
+  padding:0; margin-bottom:14px;
+}
+.explain-box .theory-list{ list-style:none; margin:0; padding:0; }
+.explain-box .theory-list li{
+  font-size:1.4rem; margin:0 0 9px; color:var(--ink); line-height:1.45; padding-left:24px; position:relative;
+}
+.explain-box .theory-list li:last-child{ margin-bottom:0; }
+.explain-box .theory-list li:before{ content:"–"; position:absolute; left:0; color:var(--c-grammar); font-weight:700; }
+
+.pattern-box{ background:none; border:none; border-radius:0; padding:0; margin-bottom:18px; }
+.pattern-box-title{ font-weight:700; font-size:1.05rem; color:var(--c-grammar); margin:0 0 10px; display:flex; align-items:center; gap:6px; text-transform:uppercase; letter-spacing:.02em; }
+.pattern-box .pattern-line{ display:block; font-size:1.5rem; font-weight:700; color:var(--c-grammar); line-height:1.6; padding-left:22px; position:relative; margin-bottom:8px; }
+.pattern-box .pattern-line:last-child{ margin-bottom:0; }
+.pattern-box .pattern-line:before{ content:"–"; position:absolute; left:0; color:var(--c-grammar); font-weight:700; }
+.explain-box .theory-list b{ color:var(--c-grammar); }
+.explain-box .theory-list .gp-kp{ color:var(--ink); }
+
+.example-list{ list-style:none; margin:0; padding:0; counter-reset:ex; }
+.example-list li{
+  counter-increment:ex; position:relative; padding:6px 0 6px 46px; margin-bottom:12px;
+  border-radius:0; background:none; font-size:1.55rem; line-height:1.5;
+}
+.example-list li:before{
+  content:counter(ex); position:absolute; left:0; top:50%; transform:translateY(-50%);
+  width:28px; height:28px; border-radius:50%; background:var(--c-grammar); color:#fff;
+  font-size:0.95rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:var(--font-latin);
+}
+.example-list .zh{ font-size:1.85rem; }
+.example-list .hl{ color:var(--c-grammar); font-weight:700; }
+/* Ví dụ hội thoại A/B trong slide lý thuyết: mỗi lượt 1 dòng, nhãn A：/B： thẳng cột */
+.example-list .ex-turn{ display:grid; grid-template-columns:2.2em 1fr; column-gap:2px; align-items:baseline; }
+.example-list .ex-turn + .ex-turn{ margin-top:calc(6px * var(--fit-scale, 1)); }
+.example-list .ex-spk{ white-space:nowrap; }
+
+.section-label{
+  font-weight:700; color:var(--c-grammar); font-size:1.2rem; margin:16px 0 10px;
+  display:flex; align-items:center; gap:8px;
+}
+.section-label:before{ content:"●"; font-size:0.6rem; }
+
+.slide.slide-scroll.active{ overflow-y:auto; align-items:flex-start; }
+.slide.slide-scroll .slide-card{ padding-bottom:26px; }
+
+.usage-block + .usage-block{ margin-top:0; }
+.usage-sep{ height:1px; background:var(--card-line); margin:26px 0; }
+.usage-chip{
+  display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:1.15rem;
+  padding:6px 18px; border-radius:999px; margin-bottom:14px;
+}
+.usage-chip.usage-1{ color:var(--c-grammar); background:var(--c-grammar-bg); border:1.5px solid var(--c-grammar-line); }
+.usage-chip.usage-2{ color:var(--c-example); background:var(--c-example-bg); border:1.5px solid var(--c-example-line); }
+.usage-chip.usage-3{ color:var(--c-expand); background:var(--c-expand-bg); border:1.5px solid var(--c-expand-line); }
+.hl-1{ color:var(--c-grammar); font-weight:700; }
+.hl-2{ color:var(--c-example); font-weight:700; }
+.hl-3{ color:var(--c-expand); font-weight:700; }
+.explain-box .theory-list .sub-line{ display:block; margin:4px 0 0 18px; font-size:1.25rem; }
+
+/* ===== Giảm cỡ chữ riêng cho slide 原来 (Điểm ngữ pháp 2) — chỉ slide này, các slide khác không đổi ===== */
+#slide-1 h2, #slide-3 h2, #slide-13 h2{ font-size:2.05rem; }
+#slide-1 .eyebrow, #slide-3 .eyebrow, #slide-13 .eyebrow{ font-size:0.85rem; }
+#slide-1 .subtitle, #slide-3 .subtitle, #slide-13 .subtitle{ font-size:1.15rem; }
+#slide-1 .gpoint-num, #slide-3 .gpoint-num, #slide-13 .gpoint-num{ font-size:0.95rem; }
+#slide-1 .usage-chip, #slide-3 .usage-chip, #slide-13 .usage-chip{ font-size:1rem; padding:5px 15px; }
+#slide-1 .structure-badge, #slide-3 .structure-badge, #slide-13 .structure-badge{ font-size:0.78rem; padding:5px 16px; }
+#slide-1 .structure-line, #slide-3 .structure-line, #slide-13 .structure-line{ font-size:1.3rem; }
+#slide-3 .structure-line{ font-size:1rem; white-space:nowrap; }
+#slide-1 .gp-box-title, #slide-3 .gp-box-title, #slide-13 .gp-box-title{ font-size:1.25rem; }
+#slide-1 .explain-box .theory-list li, #slide-3 .explain-box .theory-list li, #slide-13 .explain-box .theory-list li{ font-size:1.12rem; }
+#slide-1 .explain-box .theory-list .sub-line, #slide-3 .explain-box .theory-list .sub-line, #slide-13 .explain-box .theory-list .sub-line{ font-size:1rem; }
+#slide-1 .example-list li, #slide-3 .example-list li, #slide-13 .example-list li{ font-size:1.25rem; }
+#slide-1 .example-list .zh, #slide-3 .example-list .zh, #slide-13 .example-list .zh{ font-size:1.45rem; }
+
+/* ===== GRAMMAR POINT SUB-BOXES (Giải thích / Ví dụ / Luyện tập) ===== */
+.gp-box{ border-radius:0; padding:0; margin-bottom:20px; border:none; background:none; }
+.gp-box-title{ font-weight:700; font-size:1.45rem; margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+.gp-box.gp-explain{ background:none; border-color:transparent; }
+.gp-box.gp-explain .gp-box-title{ color:var(--c-grammar); }
+.gp-box.gp-explain .explain-box{ background:none; margin-bottom:14px; }
+.gp-box.gp-explain .example-list{ margin-top:0; }
+.gp-box.gp-example{ background:none; border-color:transparent; }
+.gp-box.gp-example .gp-box-title{ color:var(--c-example); }
+.gp-box.gp-example .example-list li{ background:none; }
+.gp-box .sub-label{ font-weight:700; font-size:1.05rem; color:var(--ink); margin:0 0 8px; }
+.gp-box + .gp-box{ margin-top:0; }
+
+/* ===== Bố cục 2 cột cho slide điểm ngữ pháp (lý thuyết trái / ví dụ phải) ===== */
+/* Không ép height cố định — để .slide-card tự cao theo nội dung như mọi slide khác,
+   cơ chế fitSlide() có sẵn trong file sẽ tự động scale vừa khít màn hình. */
+.gpoint-card-split{
+  align-self:flex-start; margin-top:34px; transform-origin:top center;
+  --fit-scale:1; /* JS (fitGpointSplit) hạ giá trị này khi nội dung quá cao, để chữ/khoảng cách co lại
+                    thay vì thu nhỏ cả khối theo transform:scale — nhờ vậy slide luôn tràn đủ chiều rộng
+                    màn hình mà không cần cuộn. */
+}
+.gpoint-card-split h2{ font-size:calc(1.95rem * var(--fit-scale)); }
+.gpoint-title-row{ display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap; margin-bottom:10px; }
+.gpoint-title-row .eyebrow{ margin:0; }
+.gpoint-title-row .gpoint-head{ margin-bottom:0; }
+.gpoint-card-split .gpoint-title-row{ gap:calc(14px * var(--fit-scale)); margin-bottom:calc(8px * var(--fit-scale)); }
+.gpoint-card-split .subtitle{ margin-bottom:calc(16px * var(--fit-scale)); font-style:italic; font-size:calc(1.05rem * var(--fit-scale)); }
+.gpoint-columns{
+  display:grid; grid-template-columns:1fr auto 1fr; column-gap:32px;
+  align-items:stretch; margin-top:10px;
+}
+.gpoint-card-split .gpoint-columns{ column-gap:calc(26px * var(--fit-scale)); margin-top:calc(8px * var(--fit-scale)); }
+.gpoint-col{ display:flex; flex-direction:column; justify-content:center; min-width:0; }
+.gpoint-col .gp-box:last-child{ margin-bottom:0; }
+.gpoint-divider{ width:1px; align-self:stretch; background:var(--card-line); }
+.gpoint-card-split .structure-box{
+  margin:calc(24px * var(--fit-scale)) 0 calc(36px * var(--fit-scale));
+  border:1.5px solid var(--c-example-line); border-radius:16px;
+  background:var(--c-example-bg);
+  padding:calc(18px * var(--fit-scale)) calc(16px * var(--fit-scale)) calc(12px * var(--fit-scale));
+}
+.gpoint-card-split .structure-line{ white-space:normal; text-wrap:balance; line-height:1.5; font-size:calc(1.6rem * var(--fit-scale)); }
+.gpoint-card-split .structure-badge{ font-size:0.72rem; padding:4px 14px; top:-13px; }
+#slide-7 .structure-line, #slide-10 .structure-line{ white-space:normal; line-height:1.4; }
+.gpoint-card-split .gp-box{ margin-bottom:calc(38px * var(--fit-scale)); }
+.gpoint-card-split .gp-box-title{ margin-bottom:calc(18px * var(--fit-scale)); font-size:calc(1.6rem * var(--fit-scale)); }
+.gpoint-card-split .explain-box .theory-list li{ margin-bottom:calc(24px * var(--fit-scale)); line-height:1.65; font-size:calc(1.6rem * var(--fit-scale)); }
+.gpoint-card-split .example-list li{ margin-bottom:calc(26px * var(--fit-scale)); line-height:1.65; font-size:calc(1.75rem * var(--fit-scale)); }
+.gpoint-card-split .example-list .zh{ font-size:calc(2.1rem * var(--fit-scale)); }
+@media (max-width:900px){
+  .gpoint-columns{ grid-template-columns:1fr; row-gap:14px; }
+  .gpoint-divider{ display:none; }
+}
+
+/* Icon "lưu ý mở rộng" cạnh nhãn gp-box-title + Modal popup */
+.gp-info-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:50%; margin-left:6px;
+  background:var(--c-grammar-bg); color:var(--c-grammar); border:1.5px solid var(--c-grammar-line);
+  font-size:1.05rem; font-weight:700; cursor:pointer;
+  vertical-align:middle; line-height:1; padding:0; -webkit-tap-highlight-color:rgba(46,125,158,0.25);
+  touch-action:manipulation; position:relative; z-index:5;
+}
+.gp-info-btn:hover, .gp-info-btn:active{ background:var(--c-grammar); color:#fff; }
+.gp-modal-overlay{
+  display:none; position:fixed; inset:0; background:rgba(64,37,48,0.45);
+  align-items:center; justify-content:center; z-index:999;
+}
+.gp-modal-overlay.open{ display:flex; }
+.gp-modal-box{
+  position:relative; background:var(--card-bg); border-radius:20px;
+  padding:32px 36px; max-width:640px; width:88%; box-shadow:0 20px 50px rgba(64,37,48,0.28);
+}
+.gp-modal-close{
+  position:absolute; top:14px; right:16px; width:32px; height:32px; border-radius:50%;
+  border:none; background:var(--bg-app-2); color:var(--ink-soft); font-size:1rem; cursor:pointer;
+}
+.gp-modal-close:hover{ background:var(--c-example-bg); color:var(--c-example); }
+.gp-modal-title{ font-weight:700; font-size:1.35rem; color:var(--c-grammar); margin:0 0 16px; }
+.gp-modal-list{ list-style:none; margin:0; padding:0; }
+.gp-modal-list li{ font-size:1.15rem; line-height:1.6; margin-bottom:20px; padding-left:22px; position:relative; color:var(--ink); }
+.gp-modal-list li:last-child{ margin-bottom:0; }
+.gp-modal-list li:before{ content:"–"; position:absolute; left:0; color:var(--c-grammar); font-weight:700; }
+.gp-modal-list b{ color:var(--c-grammar); }
+.gp-kp{ font-weight:800; font-style:italic; }
+
+/* --- Khung theo bậc luyện tập: cơ học (cam) / bán giao tiếp (xanh lá, = gp-practice) / giao tiếp tự do (tím) ---
+   Kỹ thuật: ghi đè cục bộ 3 biến --c-practice/-bg/-line bên trong từng khung, mọi rule dùng
+   var(--c-practice...) bên dưới (practice-item, blank-line, hint-word, answer-box, reveal-btn...)
+   sẽ tự động đổi màu theo, không cần lặp lại CSS. */
+.gp-box.tier-mechanical{
+  --c-practice: var(--c-expand); --c-practice-bg: var(--c-expand-bg); --c-practice-line: var(--c-expand-line);
+  background:var(--c-practice-bg); border:1.5px solid var(--c-practice-line); border-radius:18px;
+  padding:18px 24px; margin-bottom:24px;
+}
+.gp-box.tier-mechanical .gp-box-title{ color:var(--c-practice); }
+.gp-box.tier-mechanical .practice-item{ background:none; margin-bottom:30px; }
+.gp-box.tier-mechanical .practice-item:last-child{ margin-bottom:0; }
+.gp-box.tier-mechanical .practice-item .q-zh{ line-height:1.75; }
+
+.gp-box.gp-practice{
+  background:var(--c-practice-bg); border:1.5px solid var(--c-practice-line); border-radius:18px;
+  padding:18px 24px; margin-bottom:24px;
+}
+.gp-box.gp-practice .gp-box-title{ color:var(--c-practice); }
+.gp-box.gp-practice .practice-item{ background:none; }
+
+/* Slide luyện tập: giữ 2 khung xếp dọc nhưng thu gọn khoảng cách để vừa 1 màn hình mà không phải co nhỏ cả slide */
+.slide-card.practice-cols .gp-box{ padding:12px 24px; margin-bottom:12px; }
+.slide-card.practice-cols .gp-box-title{ margin-bottom:6px; }
+.slide-card.practice-cols .gp-box.tier-mechanical .practice-item{ margin-bottom:10px; }
+.slide-card.practice-cols .gp-box.tier-mechanical .practice-item:last-child{ margin-bottom:0; }
+.slide-card.practice-cols .practice-item .q-zh{ font-size:1.4rem; line-height:1.5; margin-bottom:2px; }
+.slide-card.practice-cols .gp-box.gp-practice .practice-item{ margin-bottom:8px; }
+/* Đồng nhất cỡ chữ toàn bộ slide luyện tập: câu đơn, hội thoại A/B, gợi ý (từ) và đáp án cùng 1 cỡ */
+.slide-card.practice-cols .practice-item .q-zh,
+.slide-card.practice-cols .dialog-turn.numbered,
+.slide-card.practice-cols .dialog-turn.numbered .zh,
+.slide-card.practice-cols .hint-word,
+.slide-card.practice-cols .answer-box{ font-size:1.45rem; line-height:1.5; }
+
+/* ===== PRACTICE BLOCK ===== */
+.practice-item{
+  border:none; border-radius:0; padding:0; margin-bottom:16px; background:none;
+}
+.practice-item .q-zh{ font-size:1.55rem; margin:0 0 6px; line-height:1.5; }
+.practice-item .q-vi{ font-size:1.3rem; color:var(--ink-soft); margin:0 0 8px; }
+.blank-line{
+  display:inline-block; min-width:220px; border-bottom:2px solid var(--c-practice); margin:0 4px;
+}
+.blank-line.show-answer{
+  border-bottom-color:transparent; color:var(--c-practice); font-weight:700;
+  min-width:0; padding:0 2px;
+}
+.dialog-turn{ display:grid; grid-template-columns:2.6em 1.6em 1fr; column-gap:2px; align-items:baseline; font-size:1.55rem; line-height:1.5; margin:0 0 4px; }
+.dialog-turn .speaker{ font-weight:700; }
+.dialog-turn.numbered{ grid-template-columns:2.3em 1.4em 1.1em 1fr; font-size:1.55rem; line-height:1.5; margin:0 0 4px; }
+.hint-word{ font-weight:700; color:var(--c-practice); }
+.answer-box{
+  display:none; margin-top:6px; padding:0; background:none; border:none;
+  border-radius:0; font-size:1.45rem; color:var(--c-practice); font-weight:700;
+}
+.answer-box.show{ display:block; }
+.reveal-btn, .reveal-all-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; padding:0; margin-left:8px; vertical-align:middle;
+  border-radius:50%; border:1.5px solid var(--c-practice-line);
+  background:var(--card-bg); color:var(--c-practice); font-size:0.95rem;
+  line-height:1; cursor:pointer; flex:0 0 auto;
+}
+.reveal-btn:hover, .reveal-all-btn:hover{ background:var(--c-practice); color:#fff; }
+.reveal-all-btn{ background:var(--c-practice); color:#fff; border-color:var(--c-practice); }
+.reveal-all-btn:hover{ opacity:0.88; }
+
+/* ===== SUMMARY TABLE (bài tập tổng hợp) ===== */
+.sumtable{ width:100%; border-collapse:collapse; font-size:1.35rem; margin-top:28px; border:1px solid var(--c-summary-line); }
+.sumtable th{ background:var(--c-summary-bg); color:var(--c-summary); padding:14px 12px; border:1px solid var(--c-summary-line); text-align:center; white-space:nowrap; }
+.sumtable td{ padding:22px 14px; border:1px solid var(--card-line); text-align:left; vertical-align:middle; }
+.sumtable td.opt{ text-align:center; width:70px; font-weight:700; }
+.sumtable .zh{ font-size:1.7rem; }
+.sumtable .ans-cell{ color:var(--c-summary); font-weight:700; }
+.sumtable .ans-cell.hidden-ans{ visibility:hidden; }
+.sumtable .sum-explain-row{ display:none; }
+.sumtable .sum-explain-row.show{ display:table-row; }
+.sumtable .sum-explain{ background:none; font-size:1.1rem; color:var(--ink-soft); padding:6px 12px 24px; border:1px solid var(--card-line); border-top:none; }
+
+/* -- Tô pastel từng câu trong bảng bài tập (5 câu, 5 màu xoay vòng) -- */
+.sumtable tr.row-p1 td{ background:var(--c-grammar-bg); border-color:var(--c-grammar-line); }
+.sumtable tr.row-p2 td{ background:var(--c-example-bg); border-color:var(--c-example-line); }
+.sumtable tr.row-p3 td{ background:var(--c-practice-bg); border-color:var(--c-practice-line); }
+.sumtable tr.row-p4 td{ background:var(--c-highlight-bg); border-color:var(--c-highlight-line); }
+.sumtable tr.row-p5 td{ background:var(--c-expand-bg); border-color:var(--c-expand-line); }
+.sumtable tr.row-p1 .ans-cell{ color:var(--c-grammar); }
+.sumtable tr.row-p2 .ans-cell{ color:var(--c-example); }
+.sumtable tr.row-p3 .ans-cell{ color:var(--c-practice); }
+.sumtable tr.row-p4 .ans-cell{ color:var(--c-highlight); }
+.sumtable tr.row-p5 .ans-cell{ color:var(--c-expand); }
+.sumtable tr.row-p1.sum-explain-row .sum-explain{ background:var(--c-grammar-bg); border-color:var(--c-grammar-line); border-top:none; }
+.sumtable tr.row-p2.sum-explain-row .sum-explain{ background:var(--c-example-bg); border-color:var(--c-example-line); border-top:none; }
+.sumtable tr.row-p3.sum-explain-row .sum-explain{ background:var(--c-practice-bg); border-color:var(--c-practice-line); border-top:none; }
+.sumtable tr.row-p4.sum-explain-row .sum-explain{ background:var(--c-highlight-bg); border-color:var(--c-highlight-line); border-top:none; }
+.sumtable tr.row-p5.sum-explain-row .sum-explain{ background:var(--c-expand-bg); border-color:var(--c-expand-line); border-top:none; }
+
+/* ===== 3 thẻ so sánh (即使 / 尽管 / 不管) + hàng thứ 6 của bảng bài tập + khung mẹo ===== */
+.diff-cards.three{ grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
+.diff-card.w3{ background:var(--c-expand-bg); border-color:var(--c-expand-line); }
+.diff-card.w3 .diff-word{ color:var(--c-expand); }
+.diff-card.w3 .cell-ex{ border-color:var(--c-expand-line); }
+.diff-card.w3 .cell-ex-list{ border-color:var(--c-expand-line); }
+.diff-card .mark-ok{ color:#2E7D5B; font-weight:800; }
+.diff-card .mark-no{ color:#C0392B; font-weight:800; }
+.sumtable tr.row-p6 td{ background:var(--c-summary-bg); border-color:var(--c-summary-line); }
+.sumtable tr.row-p6 .ans-cell{ color:var(--c-summary); }
+.sumtable tr.row-p6.sum-explain-row .sum-explain{ background:var(--c-summary-bg); border-color:var(--c-summary-line); border-top:none; }
+.tip-box{ background:var(--c-highlight-bg); border:1.5px solid var(--c-highlight-line); border-radius:18px; padding:14px 18px 16px; margin-top:6px; }
+.tip-box .box-title{ color:var(--c-highlight); margin-bottom:10px; }
+.tip-step{ display:none; align-items:flex-start; gap:6px; font-size:1.2rem; line-height:1.45; margin:0 0 10px; }
+.tip-step.show{ display:flex; }
+.tip-step .pt-num{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:var(--c-highlight); color:#fff; font-weight:800; font-size:0.9rem; flex:0 0 auto; margin-top:3px; }
+.tip-mnemonic{ font-size:1.15rem; color:var(--ink-soft); margin:4px 0 0; }
+.tip-next-btn{ font-family:inherit; font-size:1rem; font-weight:700; cursor:pointer; padding:5px 16px; border-radius:999px; border:1.5px solid var(--c-highlight); background:#fff; color:var(--c-highlight); margin:0 0 12px; }
+.tip-next-btn:hover{ background:var(--c-highlight); color:#fff; }
+@media (max-width:700px){ .diff-cards.three{ grid-template-columns:1fr; } }
+
+
+/* ===== COMPARE BOXES (比一比) — dạng thẻ pastel, không dùng bảng dày đặc ===== */
+.compare-box{ border-radius:0; padding:0; margin-bottom:22px; }
+.compare-box .box-title{ font-size:1.5rem; font-weight:800; margin:0 0 14px; display:flex; align-items:center; gap:8px; }
+.compare-box.same .box-title{ color:var(--c-practice); }
+.compare-box.diff .box-title{ color:var(--c-grammar); }
+
+/* -- Điểm giống nhau: mỗi ý là 1 thẻ pastel, xếp 2 cột -- */
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:stretch; }
+.compare-grid.single{ grid-template-columns:1fr; }
+.compare-point{
+  background:var(--c-practice-bg); border:1.5px solid var(--c-practice-line); border-radius:18px;
+  padding:14px 18px 16px; display:flex; flex-direction:column;
+}
+.compare-point .pt-num{
+  display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%;
+  background:var(--c-practice); color:#fff; font-weight:800; font-size:0.9rem; margin-right:6px; flex:0 0 auto;
+}
+.compare-point .desc{ font-size:1.22rem; margin:0 0 10px; line-height:1.42; }
+.compare-point .desc b{ color:var(--c-practice); }
+.compare-point .ex-big{
+  font-size:1.42rem; line-height:1.5; margin:auto 0 0; padding-top:10px;
+  border-top:1.5px dashed var(--c-practice-line);
+}
+
+/* -- Điểm khác nhau: 2 thẻ 原来/本来 đặt cạnh nhau thay cho bảng -- */
+.diff-feature{ font-size:1.1rem; font-weight:700; color:var(--ink-soft); margin:0 0 10px; text-align:center; }
+.diff-cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.diff-card{ border-radius:18px; padding:14px 18px 16px; border:1.5px solid; }
+.diff-card.w1{ background:var(--c-grammar-bg); border-color:var(--c-grammar-line); }
+.diff-card.w2{ background:var(--c-example-bg); border-color:var(--c-example-line); }
+.diff-card .diff-word{ font-size:1.85rem; font-weight:800; text-align:center; margin:0 0 8px; }
+.diff-card.w1 .diff-word{ color:var(--c-grammar); }
+.diff-card.w2 .diff-word{ color:var(--c-example); }
+.diff-card .rule-line{ font-weight:700; color:var(--ink); font-size:1.15rem; line-height:1.4; text-align:center; margin-bottom:10px; }
+.diff-card .rule-list{ text-align:left; font-weight:400; color:var(--ink); font-size:1.15rem; line-height:1.4; margin:0 0 10px; padding-left:1.2em; }
+.diff-card .rule-list li{ margin-bottom:4px; }
+.diff-card .rule-list li:last-child{ margin-bottom:0; }
+.diff-card .cell-ex{ font-size:1.42rem; line-height:1.5; padding-top:10px; border-top:1.5px dashed; }
+.diff-card.w1 .cell-ex{ border-color:var(--c-grammar-line); }
+.diff-card.w2 .cell-ex{ border-color:var(--c-example-line); }
+.diff-card .cell-ex-list{ font-size:1.42rem; line-height:1.5; padding-top:10px; padding-left:1.2em; margin:0; border-top:1.5px dashed; list-style-type:"- "; }
+.diff-card.w1 .cell-ex-list{ border-color:var(--c-grammar-line); }
+.diff-card.w2 .cell-ex-list{ border-color:var(--c-example-line); }
+.diff-card .cell-ex-list li{ margin-bottom:6px; }
+.diff-card .cell-ex-list li:last-child{ margin-bottom:0; }
+
+@media (max-width:700px){ .compare-grid, .diff-cards{ grid-template-columns:1fr; } }
+
+/* ===== RADIAL WORD DIAGRAM (同字词) ===== */
+.radial-wrap{ position:relative; width:100%; max-width:680px; aspect-ratio:1/1; margin:10px auto 4px; }
+.radial-lines{ position:absolute; inset:0; width:100%; height:100%; }
+.radial-lines line{ stroke:var(--c-expand-line); stroke-width:0.6; stroke-dasharray:2 2; }
+.radial-center{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:124px; height:124px; border-radius:50%; background:var(--c-expand); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:3.2rem; font-weight:700;
+  box-shadow:0 10px 24px rgba(198,103,42,0.35); z-index:2;
+}
+.radial-node{
+  position:absolute; transform:translate(-50%,-50%); width:180px; text-align:center;
+  background:#fff; border:1.5px solid var(--c-expand-line); border-radius:18px; padding:12px 14px;
+  box-shadow:0 6px 16px rgba(198,103,42,0.14); z-index:2; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.radial-node:hover{ transform:translate(-50%,-50%) scale(1.06); box-shadow:0 12px 26px rgba(198,103,42,0.28); border-color:var(--c-expand); }
+.radial-node .w{ font-size:1.7rem; color:var(--c-expand); font-weight:700; }
+.radial-node .py{ font-size:1rem; color:var(--ink-soft); font-style:italic; margin:4px 0; }
+.radial-node .vi{ font-size:1rem; color:var(--ink); }
+
+.radial-fallback{ display:none; flex-direction:column; gap:10px; margin:14px 0 26px; }
+.radial-fallback .row{
+  display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--c-expand-line);
+  border-radius:14px; padding:10px 14px; cursor:pointer; transition:border-color .15s ease, box-shadow .15s ease;
+}
+.radial-fallback .row:hover{ border-color:var(--c-expand); box-shadow:0 6px 16px rgba(198,103,42,0.14); }
+.radial-fallback .badge{
+  width:48px; height:48px; border-radius:50%; background:var(--c-expand); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:700; flex:0 0 auto;
+}
+.radial-fallback .w{ font-size:1.35rem; color:var(--c-expand); font-weight:700; }
+.radial-fallback .py{ font-size:0.95rem; color:var(--ink-soft); font-style:italic; }
+.radial-fallback .vi{ font-size:1rem; color:var(--ink); margin-left:auto; text-align:right; }
+@media (max-width:640px){
+  .radial-wrap{ display:none; }
+  .radial-fallback{ display:flex; }
+}
+.hl{ color:#B23A1E; font-weight:800; background:#FFE066; padding:1px 5px; border-radius:5px; box-shadow:0 1px 0 rgba(178,58,30,0.15); }
+#slide-15 .example-list .hl{ color:#B23A1E; font-weight:800; background:#FFE066; padding:1px 5px; border-radius:5px; box-shadow:0 1px 0 rgba(178,58,30,0.15); }
+
+/* ===== WORD EXAMPLE POPUP (bấm vào khung từ trong sơ đồ 同字词) ===== */
+.word-modal-overlay{
+  display:none; position:fixed; inset:0; background:rgba(64,37,48,0.55);
+  align-items:center; justify-content:center; z-index:999;
+}
+.word-modal-overlay.open{ display:flex; }
+.word-modal-box{
+  position:relative; background:var(--card-bg); border-radius:24px;
+  padding:48px 56px; max-width:900px; width:90%; box-shadow:0 24px 60px rgba(64,37,48,0.32);
+}
+.word-modal-close{
+  position:absolute; top:16px; right:18px; width:36px; height:36px; border-radius:50%;
+  border:none; background:var(--bg-app-2); color:var(--ink-soft); font-size:1.15rem; cursor:pointer;
+}
+.word-modal-close:hover{ background:var(--c-expand-bg); color:var(--c-expand); }
+.word-modal-word{ font-size:3rem; font-weight:700; color:var(--c-expand); margin:0 0 26px; text-align:center; }
+.word-modal-example{ font-size:1.85rem; line-height:1.9; color:var(--ink); text-align:left; }
+.word-modal-example .dialog-turn{ display:grid; grid-template-columns:2.2em 1fr; column-gap:6px; align-items:baseline; }
+.word-modal-example .dialog-turn + .dialog-turn{ margin-top:14px; }
+.word-modal-example .dialog-turn .speaker{ font-weight:700; color:var(--c-expand); }
+
+/* ===== PRACTICE GRID — slide luyện tập nhiều câu ngắn dạng khung màu, 2 cột ===== */
+.slide.practice-grid-slide.active{ align-items:flex-start; }
+.slide.practice-grid-slide .slide-card{
+  max-width:none; width:100%; padding:10px 8px 12px; --fit-scale:1; --gap-extra:0px;
+}
+.practice-grid{
+  display:grid; grid-template-columns:1fr 1fr; column-gap:32px;
+  row-gap:calc(16px * var(--fit-scale) + var(--gap-extra));
+}
+.practice-grid .practice-item{
+  margin-bottom:0; background:var(--c-expand-bg); border:1.5px solid var(--c-expand-line);
+  border-radius:14px; padding:calc(18px * var(--fit-scale)) calc(26px * var(--fit-scale));
+}
+.practice-grid .practice-item:last-child{ grid-column:1 / -1; }
+.practice-grid .practice-item .q-zh{ font-size:calc(1.3rem * var(--fit-scale)); line-height:1.55; margin:0; }
+.practice-grid .practice-item .q-vi{ font-size:calc(1.15rem * var(--fit-scale)); }
+.practice-grid .pg-dialog{
+  display:grid; grid-template-columns:2.4em 1fr; column-gap:2px; align-items:baseline;
+}
+.practice-grid .pg-dialog + .pg-dialog{ margin-top:calc(6px * var(--fit-scale)); }
+.practice-grid .pg-dialog .speaker{
+  white-space:nowrap; font-size:calc(1.3rem * var(--fit-scale)); line-height:1.55; font-weight:700;
+}
+.practice-grid .blank-line{
+  display:inline-block; min-width:calc(90px * var(--fit-scale)); border-bottom:2px solid var(--c-expand); margin:0 4px;
+}
+.practice-grid .blank-line.show-answer{
+  border-bottom-color:transparent; color:var(--c-expand); font-weight:700;
+  min-width:0; padding:0 4px;
+}
+.practice-grid .reveal-btn{
+  display:inline-flex; align-items:center; justify-content:center; vertical-align:middle;
+  width:30px; height:30px; background:var(--c-expand-bg); border:1px solid var(--c-expand-line);
+  color:var(--c-expand); border-radius:50%; padding:0; font-size:0.9rem; cursor:pointer;
+  opacity:0.5; margin-left:6px; transition:opacity .15s ease, background .15s ease, color .15s ease;
+}
+.practice-grid .reveal-btn:hover{ opacity:1; background:var(--c-expand); color:#fff; }
+
+/* ===== GRAMMAR USAGE TABLE (bảng nhiều cách dùng) ===== */
+.gp-table-wrap{ overflow-x:auto; margin-bottom:4px; }
+.gp-table{ width:100%; border-collapse:collapse; font-size:1.15rem; table-layout:fixed; }
+.gp-table col.label-col-w{ width:96px; }
+.gp-table th{ background:none; color:var(--c-grammar); padding:8px 12px; border:none; border-bottom:2px solid var(--c-grammar-line); text-align:center; font-size:1.2rem; }
+.gp-table th.label-col{ background:none; border:none; }
+.gp-table td{ padding:12px 14px; border:none; border-bottom:1px solid var(--card-line); vertical-align:top; line-height:1.6; background:none; }
+.gp-table td.label{ background:none; font-weight:700; color:var(--ink); text-align:center; vertical-align:middle; padding-left:6px; padding-right:6px; font-size:1.05rem; line-height:1.35; }
+.gp-table .zh{ font-size:1.2rem; }
+.gp-table .ex-line{ display:block; margin-top:6px; }
+.gp-table .ex-line:first-child{ margin-top:0; }
+.gp-table .ex-cell{ font-size:1.5rem; line-height:1.85; }
+.gp-table .ex-cell .ex-line{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--c-grammar-line); }
+.gp-table .ex-cell .ex-line:first-child{ margin-top:0; padding-top:0; border-top:none; }
+.gp-table .hl-1{ color:var(--c-grammar); font-weight:700; }
+.gp-table .hl-2{ color:var(--c-example); font-weight:700; }
+.gp-table .hl-3{ color:var(--c-expand); font-weight:700; }
+@media (max-width:700px){ .gp-table{ font-size:0.92rem; } .gp-table td, .gp-table th{ padding:8px 8px; } .gp-table col.label-col-w{ width:68px; } .gp-table .ex-cell{ font-size:1.12rem; } }
+@media (max-width:700px){
+  #slide-18 .sumtable th, #slide-18 .sumtable td.opt{ width:44px; padding:9px 4px; }
+  .sumtable{ font-size:0.9rem; }
+  .sumtable td, .sumtable th{ padding:9px 8px; }
+  .sumtable .zh{ font-size:1.05rem; }
+  .compare-point .ex-big, .diff-card .cell-ex, .diff-card .cell-ex-list{ font-size:1.1rem; }
+}
+
+/* ===== EXPAND (同字词) ===== */
+.fill-item{
+  border:none; border-radius:0; padding:0; margin-bottom:18px; background:none;
+}
+.fill-item .q-zh{ font-size:1.35rem; margin:0; line-height:1.65; }
+.fill-blank{ display:inline-block; min-width:90px; border-bottom:2px solid var(--c-expand); margin:0 4px; }
+.fill-ans{
+  display:none; margin-top:8px; font-size:1.2rem; font-weight:700; color:var(--c-expand);
+}
+.fill-ans.show{ display:block; }
+.fill-reveal-btn{
+  background:var(--card-bg); border:1.5px solid var(--c-expand-line); color:var(--c-expand);
+  border-radius:999px; padding:6px 16px; font-weight:700; font-size:0.85rem; cursor:pointer; margin-top:8px;
+}
+.fill-reveal-btn:hover{ background:var(--c-expand); color:#fff; }
+
+/* ===== STRUCTURE CALLOUT (khung "CẤU TRÚC" nổi bật, theo mẫu ảnh) ===== */
+.structure-box{
+  position:relative; background:var(--c-example-bg); border:1.5px solid var(--c-example-line); border-radius:18px;
+  padding:28px 24px 20px; margin:20px 0; text-align:center;
+}
+.structure-badge{
+  position:absolute; top:-15px; left:50%; transform:translateX(-50%);
+  background:var(--c-example); color:#fff; border-radius:999px; padding:6px 20px;
+  font-weight:700; font-size:0.85rem; letter-spacing:.04em; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+  box-shadow:0 4px 10px var(--shadow-strong);
+}
+.structure-line{ font-size:1.65rem; line-height:1.7; color:var(--ink); }
+.structure-line + .structure-line{ margin-top:6px; }
+.structure-chip{
+  display:inline-block; background:var(--c-example-bg); color:var(--c-example);
+  border-radius:9px; padding:3px 14px; font-weight:700; margin:0 2px;
+}
+@media (max-width:600px){
+  .structure-box{ padding:28px 18px 20px; }
+  .structure-line{ font-size:1.1rem; }
+}
+
+.slide-footer-nav{ display:flex; justify-content:space-between; margin-top:26px; }
+.footer-btn{
+  background:var(--card-bg); border:1.5px solid var(--card-line); color:var(--ink); border-radius:999px;
+  padding:9px 20px; font-weight:700; font-size:0.9rem; cursor:pointer;
+}
+.footer-btn:hover{ background:var(--bg-app-2); }
+.footer-btn:disabled{ opacity:0.35; cursor:default; }
+
+@media (max-width:900px){
+  .sidebar{ width:var(--sidebar-w) !important; transform:translateX(-100%); transition:transform .28s ease; z-index:200; box-shadow:14px 0 34px rgba(0,0,0,0.22); }
+  body.sidebar-collapsed .sidebar{ transform:translateX(0); }
+  body.sidebar-collapsed .nav-group summary, body.sidebar-collapsed .nav-single > button{ padding:11px 14px !important; justify-content:flex-start !important; }
+  body.sidebar-collapsed .nav-group summary .label, body.sidebar-collapsed .nav-group summary .chev,
+  body.sidebar-collapsed .nav-single > button .label, body.sidebar-collapsed .nav-item{ display:block !important; }
+  .content-col, body.sidebar-collapsed .content-col{ margin-left:0 !important; }
+  .sidebar-backdrop{ display:none; }
+  body.sidebar-collapsed .sidebar-backdrop{ display:block; position:fixed; inset:0; background:rgba(20,14,4,0.45); z-index:150; }
+  .slide-card{ padding:24px 18px; }
+}
+</style>
+</head>
+<body class="on-cover">
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div class="brand">HSK<span class="num-latin">4</span> · Bài <span class="num-latin">2</span></div>
+    <div class="sub"><span class="zh">真正的朋友</span> · Ngữ pháp</div>
+  </div>
+
+  <div class="nav-single">
+    <button class="active" data-slide="0" onclick="goTo(0)"><span class="emoji">🎬</span><span class="label zh">封面</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="1" onclick="goTo(1)"><span class="emoji">1️⃣</span><span class="label zh">正好</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="2" onclick="goTo(2)"><span class="emoji">💪</span><span class="label zh">正好 · 练习</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="3" onclick="goTo(3)"><span class="emoji">2️⃣</span><span class="label zh">差不多</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="4" onclick="goTo(4)"><span class="emoji">💪</span><span class="label zh">差不多 · 练习</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="5" onclick="goTo(5)"><span class="emoji">⚖️</span><span class="label zh">比一比 · 差不多—几乎</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="6" onclick="goTo(6)"><span class="emoji">📝</span><span class="label">Bài tập tổng hợp</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="7" onclick="goTo(7)"><span class="emoji">3️⃣</span><span class="label zh">尽管</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="8" onclick="goTo(8)"><span class="emoji">💪</span><span class="label zh">尽管 · 练习</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="9" onclick="goTo(9)"><span class="emoji">⚖️</span><span class="label zh">比一比 · 尽管—即使</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="10" onclick="goTo(10)"><span class="emoji">4️⃣</span><span class="label zh">却</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="11" onclick="goTo(11)"><span class="emoji">💪</span><span class="label zh">却 · 练习</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="12" onclick="goTo(12)"><span class="emoji">⚖️</span><span class="label zh">比一比 · 但是—却</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="13" onclick="goTo(13)"><span class="emoji">5️⃣</span><span class="label zh">而</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="14" onclick="goTo(14)"><span class="emoji">💪</span><span class="label zh">而 · 练习</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="15" onclick="goTo(15)"><span class="emoji">🔠</span><span class="label zh">同字词 · 系</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="16" onclick="goTo(16)"><span class="emoji">💪</span><span class="label zh">同字词 · 练习</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="17" onclick="goTo(17)"><span class="emoji">⚖️</span><span class="label zh">比一比 · 理解—明白—懂</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="18" onclick="goTo(18)"><span class="emoji">📝</span><span class="label">Bài tập · 理解 / 明白 / 懂</span></button>
+  </div>
+</div>
+
+<div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+<div class="content-col" id="contentCol">
+  <div class="main">
+    <div class="top-toolbar">
+      <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+      <button class="fullscreen-toggle" id="fsBtn" onclick="toggleFullscreen()" title="Toàn màn hình">⛶</button>
+    </div>
+
+    <div id="slidesContainer">
+
+      <div class="slide cover-slide active" id="slide-0"><div class="slide-card"><div class="cover-badge">HSK<span class="num-latin">4</span> · Bài <span class="num-latin">2</span> · Ngữ pháp trọng tâm</div><h1 class="zh">真正的朋友</h1><div class="cover-vi"><span class="num-latin">5</span> điểm ngữ pháp cần nắm</div><div class="cover-points"><span class="cover-point-chip zh">正好</span><span class="cover-point-chip zh">差不多</span><span class="cover-point-chip zh">尽管</span><span class="cover-point-chip zh">却</span><span class="cover-point-chip zh">而</span></div></div></div>
+      <div class="slide slide-scroll" id="slide-1"><div class="slide-card"><div class="gpoint-title-row"><span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">1</span></span> · Điểm ngữ pháp <span class="num-latin">1</span></span><div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">1</span></span><h2 class="zh">正好</h2></div></div><p class="subtitle">2 cách dùng: vừa vặn, vừa khéo · đúng lúc, vừa hay</p><div class="usage-block"><div class="usage-chip usage-1">① <span class="zh">正好</span> — Tính từ (<span class="zh">形容词</span>)</div><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">Động từ + <span class="zh">得</span> + <span class="structure-chip zh">正好</span></div><div class="structure-line"><span class="structure-chip zh">正好</span> + số lượng</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> <span class="gp-kp">vừa vặn, vừa khéo</span></li><li><b>Cách dùng:</b> Nói về thời gian, kích cỡ, số lượng, mức độ <span class="gp-kp">vừa khớp, không hơn không kém</span></li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh">苹果八块五，西瓜十一块五，<span class="hl-1">正好</span>二十块。</li><li class="zh">你来得<span class="hl-1">正好</span>，我的钱包不见了，借我点儿钱吧。</li></ul></div></div></div></div><div class="usage-sep"></div><div class="usage-block"><div class="usage-chip usage-2">② <span class="zh">正好</span> — Phó từ (<span class="zh">副词</span>)</div><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">(Chủ ngữ) + <span class="structure-chip zh">正好</span> + Động từ</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> <span class="gp-kp">đúng lúc, vừa hay</span></li><li><b>Cách dùng:</b> Gặp <span class="gp-kp">đúng dịp thuận lợi</span> để làm một việc</li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh">我们下午要去踢足球，<span class="hl-2">正好</span>一起去吧。</li><li class="zh">我妹妹出生那天，<span class="hl-2">正好</span>下雪，所以爸爸妈妈叫她"小雪"。</li></ul></div></div></div></div></div></div>
+      <div class="slide" id="slide-2"><div class="slide-card practice-cols"><div class="gp-box tier-mechanical"><div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>你来得正好，我正想找你呢。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 来得 正好 — 正好 làm bổ ngữ tính từ, diễn tả đến đúng lúc.</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>这件衣服我穿正好，不大也不小。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 正好 làm vị ngữ (tính từ), nghĩa vừa vặn, đúng cỡ.</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span>他来得正好，所以我们都不想见他。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Sai</b>. 来得正好 diễn tả đến đúng lúc, thuận lợi, nên vế sau không thể là kết quả tiêu cực. Câu đúng: <span class="zh">他来得正好，我们正想找他帮忙。</span></div></div></div><div class="gp-box gp-practice"><div class="gp-box-title">💪 Luyện tập <span class="zh" style="font-size:0.9rem;font-weight:400;">· 练一练</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>李老师来了，<span class="blank-line zh" data-answer="正好我有个语法问题想问她"></span>。<span class="hint-word zh">（正好）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（2）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">今天开会来了多少人？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="正好三十个人，一个都不多，一个都不少"></span>。<span class="hint-word zh">（正好）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（3）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">明天的球赛你想不想去看？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh">我当然想去，可惜票早就卖光了。</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">A</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="我这儿正好有两张票"></span>，到时候一起去吧。<span class="hint-word zh">（正好）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-3"><div class="slide-card"><div class="gpoint-title-row"><span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">2</span></span> · Điểm ngữ pháp <span class="num-latin">2</span></span><div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">2</span></span><h2 class="zh">差不多</h2></div></div><p class="subtitle">2 cách dùng: xấp xỉ, khác biệt không lớn · gần như, xấp xỉ</p><div class="usage-block"><div class="usage-chip usage-1">① <span class="zh">差不多</span> — Tính từ (<span class="zh">形容词</span>)</div><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">Chủ ngữ + <span class="structure-chip zh">差不多</span></div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> <span class="gp-kp">xấp xỉ, gần giống nhau</span></li><li><b>Cách dùng:</b> Nói về các đối tượng <span class="gp-kp">khác nhau rất ít, gần như giống nhau</span></li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh">这两个电子词典看上去<span class="hl-1">差不多</span>，左边这个怎么这么贵？</li><li class="zh">他们俩是在国外旅游的时候认识的，性格<span class="hl-1">差不多</span>，所以很快就成了好朋友。</li></ul></div></div></div></div><div class="usage-sep"></div><div class="usage-block"><div class="usage-chip usage-2">② <span class="zh">差不多</span> — Phó từ (<span class="zh">副词</span>)</div><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">(Chủ ngữ) + <span class="structure-chip zh">差不多</span> + số lượng</div><div class="structure-line">(Chủ ngữ) + <span class="structure-chip zh">差不多</span> + <span class="zh">跟……一样</span> + tính từ</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> <span class="gp-kp">gần như, xấp xỉ</span></li><li><b>Cách dùng:</b> Ước chừng số lượng, thời gian, mức độ <span class="gp-kp">gần bằng mức nào đó</span></li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh"><div class="ex-turn"><span class="ex-spk">A：</span><span class="ex-txt">班里同学你联系得怎么样了？来多少人？</span></div><div class="ex-turn"><span class="ex-spk">B：</span><span class="ex-txt"><span class="hl-2">差不多</span>一半儿吧。</span></div></li><li class="zh">女儿上中学后，个子长得特别快，现在都快一米七了，<span class="hl-2">差不多</span>跟我一样高了。</li></ul></div></div></div></div></div></div>
+      <div class="slide" id="slide-4"><div class="slide-card practice-cols"><div class="gp-box tier-mechanical"><div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>这两件衣服差不多，你买哪件都可以。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 差不多 làm vị ngữ (tính từ) — hai đối tượng giống nhau.</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>我来中国差不多两年了。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 差不多 (phó từ) đứng trước từ chỉ số lượng 两年, nghĩa xấp xỉ.</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span>他们俩长得很差不多。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Sai</b>. 差不多 không đi với phó từ chỉ mức độ 很. Câu đúng: <span class="zh">他们俩长得差不多。</span></div></div></div><div class="gp-box gp-practice"><div class="gp-box-title">💪 Luyện tập <span class="zh" style="font-size:0.9rem;font-weight:400;">· 练一练</span></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（1）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">照片中间这个男孩儿是你吗？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh">对，左边这个是我哥哥。</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">A</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="你们俩长得差不多，一开始我还以为是双胞胎呢"></span>。<span class="hint-word zh">（差不多）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（2）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">下个星期就要考试了，你复习得怎么样了？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="差不多了，就剩最后一课还没复习完"></span>。<span class="hint-word zh">（差不多）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（3）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">你来中国多长时间了？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="差不多两年了"></span>。<span class="hint-word zh">（差不多）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-5"><div class="slide-card"><span class="eyebrow review">⚖️ <span class="zh">比一比</span> · So sánh</span><h2 class="zh">差不多 — 几乎</h2><div class="compare-box same"><p class="box-title">✅ Điểm giống nhau</p><div class="compare-grid single"><div class="compare-point"><p class="desc"><span class="pt-num">1</span>Cả hai đều là <b>phó từ</b>, thể hiện ý "rất gần, rất tiệm cận", và đều làm <b>trạng ngữ</b>.</p><p class="zh ex-big">他汉语说得很好，<span class="hl">差不多/几乎</span>跟中国人一样。</p></div></div></div><div class="compare-box diff"><p class="box-title">🔀 Điểm khác nhau</p><p class="diff-feature">① Trước tính từ 1 âm tiết</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">差不多</p><p class="rule-line">Dùng <b>trực tiếp</b> trước tính từ 1 âm tiết</p><ul class="cell-ex-list zh"><li>他们俩<span class="hl">差不多</span>高。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">几乎</p><p class="rule-line">Phải <b>thêm từ ngữ khác</b> trước hoặc sau tính từ</p><ul class="cell-ex-list zh"><li>他们俩<span class="hl">几乎</span>一样高。</li><li>他比我<span class="hl">几乎</span>高了一头。</li></ul></div></div><p class="diff-feature" style="margin-top:20px;">② Trước từ chỉ số lượng</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">差不多</p><p class="rule-line"><b>Có</b> — diễn tả ý gần bằng số đó</p><ul class="cell-ex-list zh"><li>李老师<span class="hl">差不多</span>六十岁了。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">几乎</p><p class="rule-line"><b>Không</b> có cách dùng này</p></div></div><p class="diff-feature" style="margin-top:20px;">③ Làm tính từ vị ngữ</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">差不多</p><p class="rule-line"><b>Có</b> — chỉ các đối tượng giống nhau, không khác nhau nhiều</p><ul class="cell-ex-list zh"><li>姐妹俩性格<span class="hl">差不多</span>。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">几乎</p><p class="rule-line"><b>Không</b> có cách dùng này</p></div></div><p class="diff-feature" style="margin-top:20px;">④ Điều không mong muốn suýt xảy ra nhưng không xảy ra</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">差不多</p><p class="rule-line"><b>Không</b> có cách dùng này</p></div><div class="diff-card w2"><p class="diff-word zh">几乎</p><p class="rule-line"><b>Có</b></p><ul class="cell-ex-list zh"><li>这件事我<span class="hl">几乎</span>忘了告诉你了。</li></ul></div></div></div></div></div>
+      <div class="slide" id="slide-6"><div class="slide-card"><span class="eyebrow summary" style="margin-bottom:20px;">📝 <span class="zh">做一做</span> · Bài tập tổng hợp</span><h2 style="font-size:1.6rem;margin-bottom:16px;">Chọn từ thích hợp để điền vào chỗ trống <button class="reveal-all-btn" onclick="toggleSumTable(this)" aria-label="Xem đáp án">👁️</button></h2><table class="sumtable"><tr><th>Câu</th><th class="zh">差不多</th><th class="zh">几乎</th></tr><tr class="row-p1"><td class="zh"><span class="num-latin">（1）</span>这件事我们班<span class="blank-line" style="min-width:80px;"></span>人人都知道。</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✓</td></tr><tr class="sum-explain-row row-p1"><td class="sum-explain" colspan="3">Làm trạng ngữ diễn tả "gần như" → cả hai đều dùng được, vì đây là cách dùng giống nhau của 差不多 và 几乎.</td></tr><tr class="row-p2"><td class="zh"><span class="num-latin">（2）</span>这次考试他们俩的成绩<span class="blank-line" style="min-width:80px;"></span>。</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✕</td></tr><tr class="sum-explain-row row-p2"><td class="sum-explain" colspan="3">Làm vị ngữ (tính từ) chỉ hai đối tượng giống nhau → chỉ 差不多 có cách dùng này.</td></tr><tr class="row-p3"><td class="zh"><span class="num-latin">（3）</span>今天早上起床晚了，上课<span class="blank-line" style="min-width:80px;"></span>迟到了。</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td></tr><tr class="sum-explain-row row-p3"><td class="sum-explain" colspan="3">Việc không mong muốn (trễ học) suýt xảy ra nhưng không xảy ra → chỉ 几乎 có cách dùng này.</td></tr><tr class="row-p4"><td class="zh"><span class="num-latin">（4）</span>我的房间跟这个教室<span class="blank-line" style="min-width:80px;"></span>大。</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✕</td></tr><tr class="sum-explain-row row-p4"><td class="sum-explain" colspan="3">Đứng trực tiếp trước tính từ 1 âm tiết 大 → chỉ 差不多; 几乎 cần thêm từ khác (vd 一样大).</td></tr><tr class="row-p5"><td class="zh"><span class="num-latin">（5）</span>要不是你给我打电话，我<span class="blank-line" style="min-width:80px;"></span>忘了咱俩见面的事。</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td></tr><tr class="sum-explain-row row-p5"><td class="sum-explain" colspan="3">Việc không mong muốn (quên cuộc hẹn) suýt xảy ra nhưng không xảy ra → chỉ 几乎.</td></tr></table></div></div>
+      <div class="slide" id="slide-7"><div class="slide-card gpoint-card-split"><div class="gpoint-title-row"><span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">3</span></span> · Điểm ngữ pháp <span class="num-latin">3</span></span><div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">3</span></span><h2 class="zh">尽管</h2></div></div><p class="subtitle">Liên từ — mặc dù, dù cho (nêu một sự thật)</p><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line"><span class="structure-chip zh">尽管</span> + sự thật……，<span class="zh">但是／可是／却／还是</span> ……</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> mặc dù, dù cho — dùng ở vế đầu câu phức để nêu <span class="gp-kp">một sự thật</span></li><li><b>Lưu ý:</b> vế sau nêu kết quả <span class="gp-kp">vốn không xảy ra trong tình huống thông thường</span>, thường có 但是 / 可是 / 却 / 还是</li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh"><span class="hl">尽管</span>已经毕业这么多年，我们<span class="hl">还是</span>经常联系的。</li><li class="zh">男朋友送给我的这份礼物<span class="hl">尽管</span>不贵，<span class="hl">但却</span>让我非常感动。</li><li class="zh">叔叔最大的爱好就是打篮球，大学时他还多次参加校篮球比赛。<span class="hl">尽管</span>现在工作很忙，可到了周末他<span class="hl">还是</span>会跟朋友去打球。</li></ul></div></div></div></div></div>
+      <div class="slide" id="slide-8"><div class="slide-card practice-cols"><div class="gp-box tier-mechanical"><div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>尽管天气很冷，他还是每天去跑步。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 尽管 nêu sự thật (天气很冷), vế sau dùng 还是 hô ứng.</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>尽管我很忙，所以我还是来参加聚会了。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Sai</b>. 尽管 diễn tả chuyển ý, không dùng 所以 (quan hệ nhân quả). Câu đúng: <span class="zh">尽管我很忙，我还是来参加聚会了。</span></div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span>这份礼物尽管不贵，却让我很感动。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 尽管 nêu sự thật, vế sau dùng 却 hô ứng.</div></div></div><div class="gp-box gp-practice"><div class="gp-box-title">💪 Luyện tập <span class="zh" style="font-size:0.9rem;font-weight:400;">· 练一练</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>他尽管写得比较慢，<span class="blank-line zh" data-answer="但写得非常认真仔细"></span>。<span class="hint-word zh">（尽管）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（2）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">你们俩才认识不到一个月吧？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="尽管我们认识的时间不长，但已经像老朋友一样了"></span>。<span class="hint-word zh">（尽管）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div><div class="practice-item"><div class="dialog-turn numbered"><span class="num-latin">（3）</span><span class="speaker">A</span><span class="speaker">：</span><span class="zh">你对这儿的生活习惯了吗？</span></div><div class="dialog-turn numbered"><span class="num-latin"></span><span class="speaker">B</span><span class="speaker">：</span><span class="zh"><span class="blank-line zh" data-answer="尽管我来这儿还不到一个月，但已经渐渐习惯这儿的生活了"></span>。<span class="hint-word zh">（尽管）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></span></div></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-9"><div class="slide-card"><span class="eyebrow review">⚖️ <span class="zh">比一比</span> · So sánh</span><h2 class="zh">尽管 — 即使</h2><div class="compare-box diff"><p class="box-title">🔀 Điểm khác nhau</p><p class="diff-feature">① Dịch nghĩa</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">尽管</p><p class="rule-line">Mặc dù, tuy</p></div><div class="diff-card w2"><p class="diff-word zh">即使</p><p class="rule-line">Cho dù, dù cho, ngay cả khi</p></div></div><p class="diff-feature" style="margin-top:20px;">② Tính chất tình huống nêu ra</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">尽管</p><p class="rule-line">Sự thật đã biết chắc, đã hoặc đang xảy ra (nhượng bộ thực tế)</p><ul class="cell-ex-list zh"><li><span class="hl">尽管</span>他已经六十多岁了，身体<span class="hl">还是</span>很健康。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">即使</p><p class="rule-line">Giả thiết — chưa xảy ra hoặc trái thực tế (nhượng bộ giả thiết)</p><ul class="cell-ex-list zh"><li><span class="hl">即使</span>我们的意见不一样，我<span class="hl">也</span>会尊重你的想法。</li></ul></div></div><p class="diff-feature" style="margin-top:20px;">③ Từ hô ứng ở vế sau</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">尽管</p><p class="rule-line"><b>但是／可是／却／还是</b></p><ul class="cell-ex-list zh"><li><span class="hl">尽管</span>工作很忙，他<span class="hl">还是</span>每天坚持锻炼身体。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">即使</p><p class="rule-line"><b>也</b></p><ul class="cell-ex-list zh"><li><span class="hl">即使</span>工作很忙，他<span class="hl">也</span>每天坚持锻炼身体。</li></ul></div></div></div></div></div>
+      <div class="slide" id="slide-10"><div class="slide-card gpoint-card-split"><div class="gpoint-title-row"><span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">4</span></span> · Điểm ngữ pháp <span class="num-latin">4</span></span><div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">4</span></span><h2 class="zh">却</h2></div></div><p class="subtitle">Phó từ — lại, thế mà, nhưng lại (chuyển ý, ngữ khí nhẹ)</p><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">Chủ ngữ + <span class="structure-chip zh">却</span> + Động từ／Tính từ</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> lại, thế mà — điều xảy ra <span class="gp-kp">trái với mong đợi</span>, tương phản với vế trước</li><li><b>Lưu ý:</b> 却 là phó từ, <span class="gp-kp">đứng sau chủ ngữ, trước động từ</span>, không đứng đầu câu như 但是 / 可是</li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh">有人觉得有房子和汽车就是幸福，有人<span class="hl">却</span>认为找到真正的爱情才是幸福。</li><li class="zh">一个脾气不好的人虽然不一定让人讨厌，但是<span class="hl">却</span>很难跟人交朋友。</li><li class="zh">现在很多人虽然住在同一个楼里，但是<span class="hl">却</span>从来没说过话。</li></ul></div></div></div></div></div>
+      <div class="slide" id="slide-11"><div class="slide-card practice-cols"><div class="gp-box tier-mechanical"><div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>我说了很多遍，他却一点儿都不听。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 却 đứng sau chủ ngữ 他, trước động từ — vế sau tương phản với mong đợi.</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>我说了很多遍，却他一点儿都不听。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Sai</b>. 却 là phó từ, phải đứng sau chủ ngữ, không đặt trước chủ ngữ. Câu đúng: <span class="zh">我说了很多遍，他却一点儿都不听。</span></div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span>我吃了早饭，却去上班了。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Sai</b>. 却 biểu thị tương phản, trái mong đợi; hai vế này không tương phản. Câu đúng: <span class="zh">我吃了早饭，然后去上班了。</span></div></div></div><div class="gp-box gp-practice"><div class="gp-box-title">💪 Luyện tập <span class="zh" style="font-size:0.9rem;font-weight:400;">· 练一练</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>他喜欢锻炼身体，<span class="blank-line zh" data-answer="他弟弟却一点儿都不喜欢运动"></span>。<span class="hint-word zh">（却）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>虽然她俩是姐妹，<span class="blank-line zh" data-answer="性格却完全不一样"></span>。<span class="hint-word zh">（却）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span><span class="blank-line zh" data-answer="有的人吃得很多，却怎么也不胖"></span>；有的人吃得很少，但不瘦。<span class="hint-word zh">（却）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-12"><div class="slide-card"><span class="eyebrow review">⚖️ <span class="zh">比一比</span> · So sánh</span><h2 class="zh">但是 — 却</h2><div class="compare-box same"><p class="box-title">✅ Điểm giống nhau</p><div class="compare-grid single"><div class="compare-point"><p class="desc"><span class="pt-num">1</span>Cả hai đều biểu thị <b>chuyển ý, tương phản</b>, và có thể <b>dùng cùng nhau</b> trong một câu để nhấn mạnh.</p><p class="zh ex-big">一个脾气不好的人虽然不一定让人讨厌，<span class="hl">但是却</span>很难跟人交朋友。</p></div></div></div><div class="compare-box diff"><p class="box-title">🔀 Điểm khác nhau</p><p class="diff-feature">① Từ loại</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">但是</p><p class="rule-line">Liên từ (<span class="zh">连词</span>)</p></div><div class="diff-card w2"><p class="diff-word zh">却</p><p class="rule-line">Phó từ (<span class="zh">副词</span>)</p></div></div><p class="diff-feature" style="margin-top:20px;">② Vị trí trong câu</p><div class="diff-cards"><div class="diff-card w1"><p class="diff-word zh">但是</p><p class="rule-line">Đứng <b>đầu vế câu</b>, trước cả chủ ngữ</p><ul class="cell-ex-list zh"><li>我说了很多遍，<span class="hl">但是</span>他一点儿都不听。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">却</p><p class="rule-line">Đứng <b>sau chủ ngữ</b>, trước động từ／tính từ</p><ul class="cell-ex-list zh"><li>我说了很多遍，他<span class="hl">却</span>一点儿都不听。</li></ul></div></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-13"><div class="slide-card"><div class="gpoint-title-row"><span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">5</span></span> · Điểm ngữ pháp <span class="num-latin">5</span></span><div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">5</span></span><h2 class="zh">而</h2></div></div><p class="subtitle">2 cách dùng: nối hai vế đồng đẳng · nối hai vế chuyển ý</p><div class="usage-block"><div class="usage-chip usage-1">① <span class="zh">而</span> — Quan hệ đồng đẳng</div><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">Vế 1，<span class="structure-chip zh">而</span> + Vế 2</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> <span class="gp-kp">và, mà</span></li><li><b>Cách dùng:</b> Nối hai vế câu có quan hệ <span class="gp-kp">song song, ngang hàng</span> nhau</li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh">"明"字，左边的"日"意思是太阳，<span class="hl-1">而</span>右边的"月"意思是月亮。</li><li class="zh">结婚前，我们都要清楚自己想要的是什么，<span class="hl-1">而</span>不要被别人对幸福的看法影响。</li></ul></div></div></div></div><div class="usage-sep"></div><div class="usage-block"><div class="usage-chip usage-2">② <span class="zh">而</span> — Quan hệ chuyển ý</div><div class="gpoint-columns"><div class="gpoint-col"><div class="structure-box"><span class="structure-badge">📐 Cấu trúc</span><div class="structure-line">Vế 1，<span class="structure-chip zh">而</span> + Vế 2</div></div><div class="gp-box gp-explain"><div class="gp-box-title">📘 Giải thích</div><div class="explain-box"><ul class="theory-list"><li><b>Nghĩa:</b> <span class="gp-kp">mà, nhưng</span></li><li><b>Cách dùng:</b> Nối hai vế câu <span class="gp-kp">chuyển ý, tương phản</span> nhau (giống 但是 / 可是)</li></ul></div></div></div><div class="gpoint-divider"></div><div class="gpoint-col"><div class="gp-box gp-example"><div class="gp-box-title">✏️ Ví dụ</div><ul class="example-list"><li class="zh">在工作中遇到了问题，男人回到家不喜欢跟妻子说，<span class="hl-2">而</span>女人喜欢跟丈夫说。</li><li class="zh">有些人觉得朋友就是能和自己一起快乐的人，<span class="hl-2">而</span>我的理解是：当你遇到困难的时候，真正的朋友会站出来，及时给你帮助。</li></ul></div></div></div></div></div></div>
+      <div class="slide" id="slide-14"><div class="slide-card practice-cols"><div class="gp-box tier-mechanical"><div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>哥哥喜欢看书，而弟弟喜欢运动。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 而 nối hai vế tương phản / song song (哥哥 — 弟弟).</div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>我喜欢喝茶，而也喜欢喝咖啡。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Sai</b>. 而 không dùng để thêm ý như 也 / 还; hai vế không tương phản. Câu đúng: <span class="zh">我喜欢喝茶，也喜欢喝咖啡。</span></div></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span>他不喜欢喝咖啡，而喜欢喝茶。 <button class="reveal-btn" onclick="revealOne(this)" aria-label="Xem đáp án">👁️</button></p><div class="answer-box">→ <b>Đúng</b>. 不…而… nối hai vế đối lập: phủ định vế trước, khẳng định vế sau.</div></div></div><div class="gp-box gp-practice"><div class="gp-box-title">💪 Luyện tập <span class="zh" style="font-size:0.9rem;font-weight:400;">· 练一练</span></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（1）</span>现在越来越多的年轻人愿意旅行结婚，<span class="blank-line zh" data-answer="而不喜欢办传统的婚礼"></span>。<span class="hint-word zh">（而）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（2）</span>老年人喜欢往回看，想一想过去的事情；<span class="blank-line zh" data-answer="而年轻人喜欢往前看，想一想未来的事情"></span>。<span class="hint-word zh">（而）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div><div class="practice-item"><p class="q-zh zh"><span class="num-latin">（3）</span>有的地方一年四季都可以见到雪，<span class="blank-line zh" data-answer="而有的地方一年到头都见不到雪"></span>。<span class="hint-word zh">（而）</span> <button class="reveal-btn" onclick="revealBlankInline(this)" aria-label="Xem đáp án">👁️</button></p></div></div></div></div>
+      <div class="slide" id="slide-15"><div class="slide-card"><span class="eyebrow expand">🔠 <span class="zh">同字词</span> · Mở rộng từ vựng</span><h2 class="zh">同字词 · 系</h2><div class="radial-wrap"><svg class="radial-lines" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="50" y1="50" x2="50" y2="12"></line><line x1="50" y1="50" x2="82.9" y2="69"></line><line x1="50" y1="50" x2="17.1" y2="69"></line></svg><div class="radial-center zh">系</div><div class="radial-node" style="left:50%; top:12%;" onclick="openWordModal('wordnote-1')"><div class="w zh">联系</div><div class="py">liánxì</div><div class="vi">liên lạc, liên hệ</div></div><div class="radial-node" style="left:82.9%; top:69%;" onclick="openWordModal('wordnote-2')"><div class="w zh">关系</div><div class="py">guānxì</div><div class="vi">quan hệ, mối liên hệ</div></div><div class="radial-node" style="left:17.1%; top:69%;" onclick="openWordModal('wordnote-3')"><div class="w zh">没关系</div><div class="py">méi guānxì</div><div class="vi">không sao, không có gì</div></div></div><div class="radial-fallback"><div class="row" onclick="openWordModal('wordnote-1')"><span class="badge zh">系</span><span class="w zh">联系</span><span class="py">liánxì</span><span class="vi">liên lạc, liên hệ</span></div><div class="row" onclick="openWordModal('wordnote-2')"><span class="badge zh">系</span><span class="w zh">关系</span><span class="py">guānxì</span><span class="vi">quan hệ, mối liên hệ</span></div><div class="row" onclick="openWordModal('wordnote-3')"><span class="badge zh">系</span><span class="w zh">没关系</span><span class="py">méi guānxì</span><span class="vi">không sao, không có gì</span></div></div></div></div>
+      <div class="slide practice-grid-slide" id="slide-16"><div class="slide-card"><div class="section-label"><span class="zh">做一做</span> · Thực hành</div><p class="q-vi" style="margin-top:-4px;margin-bottom:14px;"><span class="zh">选词填空</span> · Điền từ thích hợp vào chỗ trống <span class="zh" style="font-weight:700;">(联系 · 关系 · 没关系)</span> <button class="reveal-btn" onclick="revealAllBlanks(this)" aria-label="Xem tất cả đáp án">👁️</button></p><div class="practice-grid"><div class="practice-item"><div class="pg-dialog"><span class="speaker zh">A：</span><span class="q-zh zh">奇怪，我记得这条街上有一个咖啡馆的。</span></div><div class="pg-dialog"><span class="speaker zh">B：</span><span class="q-zh zh"><span class="blank-line" data-answer="没关系"></span>，我们找个地方坐坐就行。 <button class="reveal-btn" onclick="revealBlank(this)" aria-label="Xem đáp án">👁️</button></span></div></div><div class="practice-item"><div class="pg-dialog"><span class="speaker zh">A：</span><span class="q-zh zh">你好，请问小李在家吗？</span></div><div class="pg-dialog"><span class="speaker zh">B：</span><span class="q-zh zh">他不在家，他游泳去了。</span></div><div class="pg-dialog"><span class="speaker zh">A：</span><span class="q-zh zh">好的，那我过一会儿再<span class="blank-line" data-answer="联系"></span>他吧，谢谢，再见。 <button class="reveal-btn" onclick="revealBlank(this)" aria-label="Xem đáp án">👁️</button></span></div></div><div class="practice-item"><div class="pg-dialog"><span class="speaker zh">A：</span><span class="q-zh zh">你们两个的<span class="blank-line" data-answer="关系"></span>很不错？ <button class="reveal-btn" onclick="revealBlank(this)" aria-label="Xem đáp án">👁️</button></span></div><div class="pg-dialog"><span class="speaker zh">B：</span><span class="q-zh zh">是，在我们班里，她是我最好的朋友。</span></div></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-17"><div class="slide-card"><span class="eyebrow review">⚖️ <span class="zh">比一比</span> · So sánh</span><h2 class="zh">理解 — 明白 — 懂</h2><div class="compare-box same"><p class="box-title">✅ Điểm giống nhau</p><div class="compare-grid single"><div class="compare-point"><p class="desc"><span class="pt-num">1</span>Cả ba đều là <b>động từ</b>, nghĩa "hiểu", có thể mang tân ngữ là ý nghĩa, lời nói.</p><p class="zh ex-big">你的意思我<span class="hl">理解／明白／懂</span>。</p></div></div></div><div class="compare-box diff"><p class="box-title">🔀 Điểm khác nhau</p><p class="diff-feature">① Đối tượng thường đi cùng</p><div class="diff-cards three"><div class="diff-card w1"><p class="diff-word zh">理解</p><p class="rule-line">Tâm trạng, lập trường, cách nghĩ của người khác (hiểu và thông cảm)</p><ul class="cell-ex-list zh"><li>我很<span class="hl">理解</span>你的心情。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">明白</p><p class="rule-line">Đạo lý, ý nghĩa, tình hình (hiểu ra, thấy rõ)</p><ul class="cell-ex-list zh"><li>我终于<span class="hl">明白</span>这个道理了。</li></ul></div><div class="diff-card w3"><p class="diff-word zh">懂</p><p class="rule-line">Ngôn ngữ, kiến thức, kỹ năng, quy tắc</p><ul class="cell-ex-list zh"><li>他<span class="hl">懂</span>三种外语。</li></ul></div></div><p class="diff-feature" style="margin-top:20px;">② Làm bổ ngữ kết quả (听……了)</p><div class="diff-cards three"><div class="diff-card w1"><p class="diff-word zh">理解</p><p class="rule-line">Thường <b>không</b> dùng làm bổ ngữ kết quả</p></div><div class="diff-card w2"><p class="diff-word zh">明白</p><p class="rule-line"><b>Có</b> — 听明白了, 看明白了</p><ul class="cell-ex-list zh"><li>老师说得很慢，我一下子就听<span class="hl">明白</span>了。</li></ul></div><div class="diff-card w3"><p class="diff-word zh">懂</p><p class="rule-line"><b>Có</b> — 听懂了, 看懂了</p><ul class="cell-ex-list zh"><li>老师说得很慢，我一下子就听<span class="hl">懂</span>了。</li></ul></div></div><p class="diff-feature" style="margin-top:20px;">③ Từ loại khác ngoài động từ</p><div class="diff-cards three"><div class="diff-card w1"><p class="diff-word zh">理解</p><p class="rule-line"><b>Danh từ</b> — sự hiểu biết, sự thông cảm</p><ul class="cell-ex-list zh"><li>谢谢你的<span class="hl">理解</span>。</li></ul></div><div class="diff-card w2"><p class="diff-word zh">明白</p><p class="rule-line"><b>Tính từ</b> — rõ ràng, minh bạch</p><ul class="cell-ex-list zh"><li>老师把这个问题说得很<span class="hl">明白</span>。</li></ul></div><div class="diff-card w3"><p class="diff-word zh">懂</p><p class="rule-line"><b>Không</b> có cách dùng này (chỉ là động từ)</p></div></div></div><div class="compare-box same" style="margin-top:20px;"><p class="box-title">💡 Mẹo nhớ</p><div class="compare-grid single"><div class="compare-point"><p class="desc"><span class="zh"><b>懂</b></span>：có kiến thức, biết nghề (<span class="zh">懂中文、懂音乐</span>)</p><p class="desc"><span class="zh"><b>明白</b></span>：từ chưa rõ → thấy rõ (<span class="zh">听明白了</span>)</p><p class="desc"><span class="zh"><b>理解</b></span>：hiểu <b>và thông cảm</b> (<span class="zh">请你理解我</span>)</p></div></div></div></div></div>
+      <div class="slide slide-scroll" id="slide-18"><div class="slide-card"><span class="eyebrow summary" style="margin-bottom:20px;">📝 <span class="zh">做一做</span> · Bài tập tổng hợp</span><h2 style="font-size:1.6rem;margin-bottom:16px;">Chọn từ thích hợp để điền vào chỗ trống <button class="reveal-all-btn" onclick="toggleSumTable(this)" aria-label="Xem đáp án">👁️</button></h2><table class="sumtable"><tr><th>Câu</th><th class="zh">理解</th><th class="zh">明白</th><th class="zh">懂</th></tr><tr class="row-p1"><td class="zh"><span class="num-latin">（1）</span>请你<span class="blank-line" style="min-width:80px;"></span>我，我真的不是故意迟到的。</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✕</td></tr><tr class="sum-explain-row row-p1"><td class="sum-explain" colspan="4">Hiểu và thông cảm cho người khác → chỉ 理解.</td></tr><tr class="row-p2"><td class="zh"><span class="num-latin">（2）</span>他不<span class="blank-line" style="min-width:80px;"></span>中文，所以看不了中文电影。</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td></tr><tr class="sum-explain-row row-p2"><td class="sum-explain" colspan="4">Đối tượng là ngôn ngữ → chỉ 懂.</td></tr><tr class="row-p3"><td class="zh"><span class="num-latin">（3）</span>谢谢你的<span class="blank-line" style="min-width:80px;"></span>，我会更努力的。</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✕</td></tr><tr class="sum-explain-row row-p3"><td class="sum-explain" colspan="4">Làm danh từ → chỉ 理解.</td></tr><tr class="row-p4"><td class="zh"><span class="num-latin">（4）</span>老师把这个问题说得很<span class="blank-line" style="min-width:80px;"></span>，我一听就知道怎么做了。</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✕</td></tr><tr class="sum-explain-row row-p4"><td class="sum-explain" colspan="4">Làm tính từ "rõ ràng" → chỉ 明白.</td></tr><tr class="row-p5"><td class="zh"><span class="num-latin">（5）</span>老师说得很慢，我一下子就听<span class="blank-line" style="min-width:80px;"></span>了。</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✓</td></tr><tr class="sum-explain-row row-p5"><td class="sum-explain" colspan="4">Làm bổ ngữ kết quả → 明白 / 懂 đều được, 理解 thường không dùng.</td></tr><tr class="row-p6"><td class="zh"><span class="num-latin">（6）</span>这个孩子很<span class="blank-line" style="min-width:80px;"></span>事，从来不让父母担心。</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td></tr><tr class="sum-explain-row row-p6"><td class="sum-explain" colspan="4">Cụm cố định 懂事 → chỉ 懂.</td></tr></table></div></div>
+
+    </div>
+  </div>
+  <div class="site-footer">HSK<span class="num-latin">4</span>_Bài<span class="num-latin">2</span>_Ngữ pháp_hathai_<span class="num-latin">0387657439</span></div>
+
+  <!-- Modal popup dùng chung cho các nút "lưu ý mở rộng" (ⓘ) ở mọi điểm ngữ pháp -->
+  <div class="gp-modal-overlay" id="gpModalOverlay" onclick="closeGpModal()">
+    <div class="gp-modal-box" onclick="event.stopPropagation()">
+      <button class="gp-modal-close" onclick="closeGpModal()">✕</button>
+      <div id="gpModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Modal popup ví dụ cho sơ đồ "同字词" — bấm vào khung từ để xem -->
+  <div class="word-modal-overlay" id="wordModalOverlay" onclick="closeWordModal()">
+    <div class="word-modal-box" onclick="event.stopPropagation()">
+      <button class="word-modal-close" onclick="closeWordModal()">✕</button>
+      <div id="wordModalContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Template ví dụ cho từng từ trong sơ đồ 同字词 — id đặt theo "wordnote-<số>", đúng thứ tự radial-node -->
+
+
+
+<template id="wordnote-1">
+  <div class="word-modal-word zh">联系</div>
+  <div class="word-modal-example zh"><div class="dialog-turn"><span class="speaker">A：</span><span class="content">喂，喂，你在哪儿呢？怎么听不清楚你说话？</span></div><div class="dialog-turn"><span class="speaker">B：</span><span class="content">我现在在火车站，人太多了，过会儿我再跟你<span class="hl">联系</span>吧。</span></div></div>
+</template>
+<template id="wordnote-2">
+  <div class="word-modal-word zh">关系</div>
+  <div class="word-modal-example zh"><div class="dialog-turn"><span class="speaker">A：</span><span class="content">你和她<span class="hl">关系</span>那么好，能帮我介绍一下吗？</span></div><div class="dialog-turn"><span class="speaker">B：</span><span class="content">没问题，下次我们学校开舞会时我叫你来。</span></div></div>
+</template>
+<template id="wordnote-3">
+  <div class="word-modal-word zh">没关系</div>
+  <div class="word-modal-example zh"><div class="dialog-turn"><span class="speaker">A：</span><span class="content">你怎么了？是不是太累了？</span></div><div class="dialog-turn"><span class="speaker">B：</span><span class="content">我可能有点儿发烧，<span class="hl">没关系</span>，休息一下就好了。</span></div></div>
+</template>
+<script>
+function toggleSidebar(){ document.body.classList.toggle('sidebar-collapsed'); setTimeout(fitSlide, 300); }
+
+/* Modal popup "lưu ý mở rộng" — dùng chung cho mọi điểm ngữ pháp */
+function openGpModal(templateId){
+  var tpl = document.getElementById(templateId);
+  if(!tpl) return;
+  document.getElementById('gpModalContent').innerHTML = tpl.innerHTML;
+  document.getElementById('gpModalOverlay').classList.add('open');
+}
+function closeGpModal(){
+  document.getElementById('gpModalOverlay').classList.remove('open');
+}
+
+/* Modal popup ví dụ từ vựng — dùng cho sơ đồ "同字词" */
+function openWordModal(templateId){
+  var tpl = document.getElementById(templateId);
+  if(!tpl) return;
+  document.getElementById('wordModalContent').innerHTML = tpl.innerHTML;
+  document.getElementById('wordModalOverlay').classList.add('open');
+}
+function closeWordModal(){
+  document.getElementById('wordModalOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeGpModal(); closeWordModal(); } });
+
+var totalSlides = 19;
+var current = 0;
+
+function fitSlide(){
+  var slideEl = document.getElementById('slide-'+current);
+  if(!slideEl) return;
+  var card = slideEl.querySelector('.slide-card');
+  if(!card) return;
+  if(slideEl.classList.contains('practice-grid-slide')){ fitPracticeGrid(slideEl, card); return; }
+  if(slideEl.classList.contains('slide-scroll')){ card.style.transform = 'none'; return; }
+  if(card.classList.contains('gpoint-card-split')){ fitGpointSplit(slideEl, card); return; }
+  card.style.transform = 'none';
+  var contW = slideEl.clientWidth;
+  var contH = slideEl.clientHeight;
+  var cardW = card.offsetWidth;
+  var cardH = card.offsetHeight;
+  if(!contW || !contH || !cardW || !cardH) return;
+  var scale = Math.min(contW/cardW, contH/cardH);
+  if(scale > 1.15) scale = 1.15;
+  card.style.transform = 'scale(' + scale.toFixed(4) + ')';
+}
+
+/* Slide "gpoint-card-split" (2 cột: lý thuyết trái / ví dụ phải): KHÔNG dùng transform:scale
+   (vì sẽ thu nhỏ luôn cả chiều rộng, gây khoảng trắng 2 bên khi nội dung hơi cao).
+   Thay vào đó, giữ nguyên chiều rộng 100% và chỉ co nhỏ cỡ chữ + khoảng cách dòng
+   (biến --fit-scale) đến khi vừa đúng chiều cao màn hình — không bao giờ cuộn, không bao giờ hẹp bề ngang. */
+function fitGpointSplit(slideEl, card){
+  card.style.transform = 'none';
+  card.style.setProperty('--fit-scale', 1);
+  var contH = slideEl.clientHeight;
+  if(!contH) return;
+  var topOffset = card.offsetTop;
+  var availH = (topOffset > 0 && topOffset < contH) ? (contH - topOffset) : contH;
+  if(!availH) return;
+  // Mục tiêu: chữ to nhất có thể mà vẫn vừa 1 màn hình (chừa 40px cho chân trang).
+  // Chiều cao không tỉ lệ tuyến tính với cỡ chữ (chữ to -> xuống dòng nhiều hơn) nên dò lặp nhiều lần, cả tăng lẫn giảm.
+  var target = availH - 40, s = 1, MIN = 0.5, MAX = 1.7;
+  for(var i = 0; i < 10; i++){
+    card.style.setProperty('--fit-scale', s.toFixed(4));
+    var h = card.scrollHeight;
+    if(!h) break;
+    var ratio = target / h;
+    if(ratio <= 1.0 && ratio >= 0.96) break;
+    var ns = s * ratio;
+    if(ns < MIN) ns = MIN;
+    if(ns > MAX) ns = MAX;
+    if(Math.abs(ns - s) < 0.003) break;
+    s = ns;
+  }
+  // Bảo đảm cuối cùng không tràn
+  card.style.setProperty('--fit-scale', s.toFixed(4));
+  var guard = 0;
+  while(card.scrollHeight > availH - 20 && s > MIN && guard < 12){
+    s = Math.max(MIN, s * 0.96);
+    card.style.setProperty('--fit-scale', s.toFixed(4));
+    guard++;
+  }
+  // Tinh chỉnh tăng dần: nếu còn dư chỗ thì phóng thêm từng bước nhỏ cho đến khi sát giới hạn
+  var up = 0;
+  while(s < MAX && up < 20){
+    var t = Math.min(MAX, s * 1.02);
+    card.style.setProperty('--fit-scale', t.toFixed(4));
+    if(card.scrollHeight > availH - 40){ card.style.setProperty('--fit-scale', s.toFixed(4)); break; }
+    s = t; up++;
+  }
+}
+
+/* Slide "practice-grid-slide": giữ full chiều rộng, chỉ tự co giãn cỡ chữ/khoảng cách
+   (biến --fit-scale, --gap-extra) để lấp đầy đúng 1 màn hình, không cuộn. */
+function fitPracticeGrid(slideEl, card){
+  card.style.transform = 'none';
+  card.style.setProperty('--fit-scale', 1);
+  card.style.setProperty('--gap-extra', '0px');
+  var availH = slideEl.clientHeight;
+  var neededH = card.scrollHeight;
+  if(!availH || !neededH) return;
+  var s = availH / neededH;
+  if(s < 0.5) s = 0.5;
+  if(s > 1.25) s = 1.25;
+  card.style.setProperty('--fit-scale', s.toFixed(4));
+  var neededH2 = card.scrollHeight;
+  if(neededH2 > availH){
+    var s2 = s * (availH / neededH2);
+    if(s2 < 0.5) s2 = 0.5;
+    card.style.setProperty('--fit-scale', s2.toFixed(4));
+    neededH2 = card.scrollHeight;
+  }
+  var leftover = availH - neededH2;
+  if(leftover > 4){
+    var extra = leftover / 2;
+    card.style.setProperty('--gap-extra', extra.toFixed(1) + 'px');
+  }
+}
+
+/* Đáp án của .practice-grid hiện thay vào đúng vị trí dấu gạch ngang trong câu */
+function revealBlank(btn){
+  var item = btn.closest('.practice-item');
+  var blank = item ? item.querySelector('.blank-line') : null;
+  if(!blank) return;
+  var showing = blank.classList.contains('show-answer');
+  if(showing){
+    blank.textContent = '';
+    blank.classList.remove('show-answer');
+    btn.textContent = '👁️';
+  } else {
+    blank.textContent = blank.getAttribute('data-answer') || '';
+    blank.classList.add('show-answer');
+    btn.textContent = '🙈';
+  }
+  fitSlide();
+}
+function revealAllBlanks(btn){
+  var card = btn.closest('.slide-card');
+  var grid = card ? card.querySelector('.practice-grid') : null;
+  if(!grid) return;
+  var blanks = grid.querySelectorAll('.blank-line[data-answer]');
+  var anyHidden = Array.prototype.some.call(blanks, function(b){ return !b.classList.contains('show-answer'); });
+  blanks.forEach(function(b){
+    if(anyHidden){ b.textContent = b.getAttribute('data-answer') || ''; b.classList.add('show-answer'); }
+    else { b.textContent = ''; b.classList.remove('show-answer'); }
+  });
+  grid.querySelectorAll('.reveal-btn').forEach(function(rb){ rb.textContent = anyHidden ? '🙈' : '👁️'; });
+  btn.textContent = anyHidden ? '🙈' : '👁️';
+  fitSlide();
+}
+
+function showSlide(n){
+  if(n<0) n=0; if(n>totalSlides-1) n=totalSlides-1;
+  document.getElementById('slide-'+current).classList.remove('active');
+  var navCurrent = document.querySelector('.nav-item.active, .nav-single > button.active');
+  if(navCurrent) navCurrent.classList.remove('active');
+  current = n;
+  var slideEl = document.getElementById('slide-'+current);
+  slideEl.classList.add('active');
+  document.body.classList.toggle('on-cover', current === 0);
+  var navNext = document.querySelector('[data-slide="'+current+'"]');
+  if(navNext) navNext.classList.add('active');
+  requestAnimationFrame(fitSlide);
+}
+function goTo(n){
+  if(n === current){ toggleSidebar(); return; }
+  showSlide(n);
+  if(window.innerWidth <= 900) document.body.classList.remove('sidebar-collapsed');
+}
+
+document.querySelectorAll('.nav-group').forEach(function(group){
+  group.addEventListener('toggle', function(){
+    if(group.open){
+      document.querySelectorAll('.nav-group').forEach(function(other){
+        if(other !== group) other.open = false;
+      });
+    }
+  });
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight'){ showSlide(current+1); } else if(e.key==='ArrowLeft'){ showSlide(current-1); }
+});
+
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(function(){});
+  } else {
+    document.exitFullscreen();
+  }
+}
+document.addEventListener('fullscreenchange', function(){
+  var btn = document.getElementById('fsBtn');
+  if(btn) btn.textContent = document.fullscreenElement ? '⤢' : '⛶';
+  setTimeout(fitSlide, 150);
+});
+
+var fitResizeTimer;
+window.addEventListener('resize', function(){
+  clearTimeout(fitResizeTimer);
+  fitResizeTimer = setTimeout(fitSlide, 100);
+});
+window.addEventListener('load', fitSlide);
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitSlide); }
+requestAnimationFrame(fitSlide);
+
+
+/* ===== REVEAL ANSWER — điền thẳng vào chỗ trống (blank-line) ===== */
+function revealBlankInline(btn){
+  var item = btn.closest('.practice-item');
+  var blank = item ? item.querySelector('.blank-line[data-answer]') : null;
+  if(!blank) return;
+  var showing = blank.classList.contains('show-answer');
+  if(showing){
+    blank.textContent = '';
+    blank.classList.remove('show-answer');
+    btn.textContent = '👁️';
+  } else {
+    blank.textContent = blank.getAttribute('data-answer') || '';
+    blank.classList.add('show-answer');
+    btn.textContent = '🙈';
+  }
+  fitSlide();
+}
+
+/* ===== REVEAL ANSWER ===== */
+function revealOne(btn){
+  var item = btn.closest('.practice-item');
+  var box = item ? item.querySelector('.answer-box') : btn.nextElementSibling;
+  if(!box) return;
+  box.classList.toggle('show');
+  btn.textContent = box.classList.contains('show') ? '🙈' : '👁️';
+  fitSlide();
+}
+function toggleSumTable(btn){
+  var card = btn.closest('.slide-card');
+  var cells = card.querySelectorAll('.sumtable .ans-cell');
+  var rows = card.querySelectorAll('.sumtable .sum-explain-row');
+  var hiding = !cells[0].classList.contains('hidden-ans');
+  cells.forEach(function(c){ c.classList.toggle('hidden-ans', hiding); });
+  rows.forEach(function(r){ r.classList.toggle('show', !hiding); });
+  btn.textContent = hiding ? '👁️' : '🙈';
+  fitSlide();
+}
+function nextTipStep(btn){
+  var box = btn.closest('.tip-box');
+  var hidden = box.querySelectorAll('.tip-step:not(.show)');
+  if(hidden.length){ hidden[0].classList.add('show'); }
+  else { box.querySelectorAll('.tip-step').forEach(function(st){ st.classList.remove('show'); }); }
+  var left = box.querySelectorAll('.tip-step:not(.show)').length;
+  btn.textContent = left ? '👁️ Hiện bước tiếp' : '🙈 Ẩn lại';
+  fitSlide();
+}
+
+</script>
+</body>
+</html>
